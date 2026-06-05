@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore AgentMemoryOS.slnx
+
+      - name: Build (warnings as errors)
+        run: dotnet build AgentMemoryOS.slnx --no-restore -c Release
+
+      - name: Unit tests
+        run: dotnet test tests/AgentMemoryOS.Tests/AgentMemoryOS.Tests.csproj --no-build -c Release
