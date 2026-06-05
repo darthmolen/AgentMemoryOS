@@ -1,0 +1,19 @@
+root = true
+
+# This is a customer-representative example app (the future NuGet consumer's shape), not
+# library code, so analyzers and StyleCop are advisory here rather than enforced.
+[*.cs]
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+charset = utf-8-bom
+insert_final_newline = true
+trim_trailing_whitespace = true
+dotnet_analyzer_diagnostic.severity = suggestion
+dotnet_diagnostic.CS1591.severity = none
+dotnet_diagnostic.SA0001.severity = none
+
+[*.json]
+indent_size = 2
+charset = utf-8
+insert_final_newline = true

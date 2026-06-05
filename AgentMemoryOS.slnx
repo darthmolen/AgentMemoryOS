@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AgentMemoryOS.Abstractions/AgentMemoryOS.Abstractions.csproj" />
+    <Project Path="src/AgentMemoryOS.All/AgentMemoryOS.All.csproj" />
+    <Project Path="src/AgentMemoryOS.Postgres/AgentMemoryOS.Postgres.csproj" />
+    <Project Path="src/AgentMemoryOS.Redis/AgentMemoryOS.Redis.csproj" />
+    <Project Path="src/AgentMemoryOS/AgentMemoryOS.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AgentMemoryOS.Example.IntegrationTests/AgentMemoryOS.Example.IntegrationTests.csproj" />
+    <Project Path="tests/AgentMemoryOS.Example.WebHost/AgentMemoryOS.Example.WebHost.csproj" />
+    <Project Path="tests/AgentMemoryOS.Postgres.IntegrationTests/AgentMemoryOS.Postgres.IntegrationTests.csproj" />
+    <Project Path="tests/AgentMemoryOS.Redis.IntegrationTests/AgentMemoryOS.Redis.IntegrationTests.csproj" />
+    <Project Path="tests/AgentMemoryOS.Tests/AgentMemoryOS.Tests.csproj" />
+  </Folder>
+</Solution>

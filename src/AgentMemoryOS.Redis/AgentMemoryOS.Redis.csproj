@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>AgentMemoryOS.Redis</RootNamespace>
+    <Description>Optional Redis cache-aside decorators over the MAF tiered-memory stores.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgentMemoryOS.Abstractions\AgentMemoryOS.Abstractions.csproj" />
+    <ProjectReference Include="..\AgentMemoryOS\AgentMemoryOS.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="StackExchange.Redis" />
+  </ItemGroup>
+
+</Project>

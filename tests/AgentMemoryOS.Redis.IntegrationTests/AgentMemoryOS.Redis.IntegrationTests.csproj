@@ -1,0 +1,18 @@
+﻿<Project Sdk="MSTest.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>AgentMemoryOS.Redis.IntegrationTests</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AgentMemoryOS.Redis\AgentMemoryOS.Redis.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="StackExchange.Redis" />
+    <PackageReference Include="Testcontainers.Redis" />
+  </ItemGroup>
+
+</Project>

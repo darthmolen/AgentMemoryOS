@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <RootNamespace>AgentMemoryOS.Example.WebHost</RootNamespace>
+    <UserSecretsId>AgentMemoryOS-example-webhost</UserSecretsId>
+    <IsPackable>false</IsPackable>
+    <!--
+      This is a customer-representative example app, not library code. A real consumer of the
+      NuGet package would not inherit our internal StyleCop/analyzer suite or warnings-as-errors,
+      so we opt out of them here to keep the example readable and idiomatic.
+    -->
+    <RunAnalyzers>false</RunAnalyzers>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AgentMemoryOS\AgentMemoryOS.csproj" />
+    <ProjectReference Include="..\..\src\AgentMemoryOS.Postgres\AgentMemoryOS.Postgres.csproj" />
+    <ProjectReference Include="..\..\src\AgentMemoryOS.Redis\AgentMemoryOS.Redis.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Agents.AI" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" />
+    <PackageReference Include="Azure.AI.OpenAI" />
+    <PackageReference Include="Azure.Identity" />
+  </ItemGroup>
+
+</Project>

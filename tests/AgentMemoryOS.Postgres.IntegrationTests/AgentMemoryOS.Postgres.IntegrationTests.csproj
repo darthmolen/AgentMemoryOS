@@ -1,0 +1,16 @@
+﻿<Project Sdk="MSTest.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>AgentMemoryOS.Postgres.IntegrationTests</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AgentMemoryOS.Postgres\AgentMemoryOS.Postgres.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Testcontainers.PostgreSql" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,39 @@
+# Inherit from parent but override specific rules for tests
+root = false
+
+[*.{cs,vb}]
+dotnet_diagnostic.IDE0058.severity = suggestion
+dotnet_diagnostic.IDE0005.severity = suggestion
+dotnet_diagnostic.CS8602.severity = suggestion
+dotnet_diagnostic.CS8604.severity = suggestion
+dotnet_diagnostic.CA1849.severity = suggestion
+dotnet_diagnostic.CA1307.severity = suggestion
+dotnet_diagnostic.CA1062.severity = suggestion
+dotnet_diagnostic.CA1054.severity = suggestion
+dotnet_diagnostic.CA1812.severity = suggestion
+dotnet_diagnostic.CA2234.severity = suggestion
+dotnet_diagnostic.IDE0060.severity = suggestion
+dotnet_diagnostic.CA1002.severity = suggestion
+dotnet_diagnostic.CA1826.severity = suggestion
+
+# CA2007: ConfigureAwait - not needed in test code (matches src/.editorconfig)
+dotnet_diagnostic.CA2007.severity = none
+
+# CS1591: Missing XML comment - test classes/methods are not documented
+dotnet_diagnostic.CS1591.severity = none
+
+# CA1515: Public types could be internal - MSTest requires public test classes
+dotnet_diagnostic.CA1515.severity = none
+
+# CA1848: Use the LoggerMessage delegates - Disabled for tests
+dotnet_diagnostic.CA1848.severity = none
+
+# CA1873: Avoid expensive logging argument evaluation - Disabled for tests
+dotnet_diagnostic.CA1873.severity = none
+
+# SA1402: FileMayOnlyContainASingleType
+dotnet_diagnostic.SA1402.severity = none
+
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.DocumentationRules.severity = none
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.OrderingRules.severity = none
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.LayoutRules.severity = none

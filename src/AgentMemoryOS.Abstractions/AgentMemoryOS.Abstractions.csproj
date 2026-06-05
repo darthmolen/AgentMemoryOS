@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>AgentMemoryOS.Abstractions</RootNamespace>
+    <Description>Storage and lifecycle abstractions for the MAF tiered-memory provider.</Description>
+  </PropertyGroup>
+
+</Project>

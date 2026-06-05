@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Metapackage bundling the MAF tiered-memory provider with the PostgreSQL + pgvector and Redis backends. Install this for the whole stack, or reference the individual packages a la carte.</Description>
+    <!-- Metapackage: no assembly of its own; it exists only to carry package dependencies. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>false</SuppressDependenciesWhenPacking>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgentMemoryOS\AgentMemoryOS.csproj" />
+    <ProjectReference Include="..\AgentMemoryOS.Postgres\AgentMemoryOS.Postgres.csproj" />
+    <ProjectReference Include="..\AgentMemoryOS.Redis\AgentMemoryOS.Redis.csproj" />
+  </ItemGroup>
+
+</Project>
