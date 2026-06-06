@@ -4,6 +4,13 @@ using AgentMemoryOS.Example.WebHost;
 var builder = WebApplication.CreateBuilder(args);
 builder.AddExampleMemory();
 
+// ── Security ───────────────────────────────────────────────────────────────────────────
+// This example has NO authentication: every endpoint is open. That is fine for a local demo
+// but is NOT production-ready. To put Microsoft Entra ID (Azure AD) in front of the API, follow
+// WEBHOST-ENTRA-AUTHENTICATION-AUTHORIZATION.md (it includes a drop-in AddCustomAuthentication
+// extension) and uncomment the next line:
+// builder.AddCustomAuthentication();
+
 var app = builder.Build();
 app.SeedExampleWorkspace();
 

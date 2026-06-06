@@ -165,3 +165,17 @@ Notes:
   `v<version>` already exists, the watcher no-ops (no tag, no publish).
 - **Manual fallback.** Pushing a tag by hand still works: `git tag v1.0.1 && git push origin v1.0.1`.
 - **Prerequisite.** The `NUGET_API_KEY` repository secret must be set (it already is).
+
+---
+
+## Production note — the example has no authentication
+
+The Example.WebHost exposes `/chat` and `/memory/facts` with **no authentication** — every
+endpoint is open. That keeps the demo frictionless, but it is **not production-ready**: a real
+deployment must put authentication and authorization in front of the API.
+
+See [WEBHOST-ENTRA-AUTHENTICATION-AUTHORIZATION.md](WEBHOST-ENTRA-AUTHENTICATION-AUTHORIZATION.md)
+for a complete, copy-paste guide to securing it with Microsoft Entra ID — interactive (delegated)
+and server-to-server (app-only), with the app-registration `az` commands, the appsettings/secret
+split, and an `AddCustomAuthentication()` drop-in. `Program.cs` already carries the commented
+signpost for where it plugs in.
