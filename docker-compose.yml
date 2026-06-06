@@ -18,7 +18,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - maf
+      - memory
     healthcheck:
       # $$ escapes to a literal $, so POSTGRES_USER is read from the container's env at runtime.
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-agentmemory}"]
@@ -34,7 +34,7 @@ services:
     volumes:
       - redisdata:/data
     networks:
-      - maf
+      - memory
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -70,7 +70,7 @@ services:
     volumes:
       - hfcache:/root/.cache/huggingface
     networks:
-      - maf
+      - memory
     deploy:
       resources:
         reservations:
@@ -86,7 +86,7 @@ services:
       start_period: 120s
 
 networks:
-  maf:
+  memory:
     driver: bridge
 
 volumes:

@@ -1,5 +1,10 @@
 # AgentMemoryOS
 
+[![CI](https://github.com/darthmolen/AgentMemoryOS/actions/workflows/ci.yml/badge.svg)](https://github.com/darthmolen/AgentMemoryOS/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/AgentMemoryOS.svg)](https://www.nuget.org/packages/AgentMemoryOS)
+[![Downloads](https://img.shields.io/nuget/dt/AgentMemoryOS.svg)](https://www.nuget.org/packages/AgentMemoryOS)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/darthmolen/AgentMemoryOS/blob/main/LICENSE)
+
 **Durable, tiered memory for Microsoft Agent Framework (MAF) agents.** .NET 10 / C#.
 
 LLM agents are amnesiacs. Between turns — and especially between sessions — they start from
