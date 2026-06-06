@@ -1,0 +1,63 @@
+name: Tag on version bump
+
+# Ambient release trigger: when VersionPrefix in src/Directory.Build.props changes
+# on main, tag v<version> (the immutable record of the decision) and publish.
+# Bumping the version in a PR *is* the release decision; merging is the approval.
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/Directory.Build.props'
+
+permissions:
+  contents: write   # needed to push the tag
+
+jobs:
+  tag:
+    name: tag-version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.read.outputs.version }}
+      tagged: ${{ steps.tag.outputs.tagged }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read VersionPrefix
+        id: read
+        run: |
+          version=$(grep -oPm1 '(?<=<VersionPrefix>)[^<]+' src/Directory.Build.props)
+          if [ -z "$version" ]; then
+            echo "::error::Could not read <VersionPrefix> from src/Directory.Build.props"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Resolved version: $version"
+
+      - name: Create tag if it does not exist
+        id: tag
+        # Tag pushed with GITHUB_TOKEN deliberately does NOT trigger release.yml's
+        # tag event (GitHub blocks that recursion); the release job below calls it.
+        run: |
+          v="v${{ steps.read.outputs.version }}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$v" >/dev/null 2>&1; then
+            echo "Tag $v already exists; nothing to release."
+            echo "tagged=false" >> "$GITHUB_OUTPUT"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git tag -a "$v" -m "Release $v"
+            git push origin "$v"
+            echo "Created and pushed $v."
+            echo "tagged=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  release:
+    name: release
+    needs: tag
+    if: needs.tag.outputs.tagged == 'true'
+    uses: ./.github/workflows/release.yml
+    with:
+      version: ${{ needs.tag.outputs.version }}
+    secrets: inherit

@@ -1,9 +1,17 @@
 name: Release
 
-# Tag a release to publish, e.g. `git tag v1.0.0 && git push origin v1.0.0`.
+# Publishes to NuGet. Two ways in:
+#   1. Push a tag manually, e.g. `git tag v1.0.0 && git push origin v1.0.0`.
+#   2. Called by tag-on-version-bump.yml after a VersionPrefix change merges to main.
 on:
   push:
     tags: [ 'v*' ]
+  workflow_call:
+    inputs:
+      version:
+        description: Version to pack and publish (no leading v).
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -20,9 +28,15 @@ jobs:
         with:
           global-json-file: global.json
 
-      - name: Derive version from tag
+      - name: Derive version
         id: ver
-        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+        # workflow_call supplies inputs.version; a tag push derives it from the ref.
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            echo "version=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Pack
         run: dotnet pack AgentMemoryOS.slnx -c Release -o artifacts -p:Version=${{ steps.ver.outputs.version }}
