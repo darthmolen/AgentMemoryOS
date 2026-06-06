@@ -1,5 +1,13 @@
-﻿using AgentMemoryOS.Abstractions;
+﻿// To enable Microsoft Entra ID auth (see WEBHOST-ENTRA-AUTHENTICATION-AUTHORIZATION.md), add the
+// Microsoft.Identity.Web NuGet package — IntelliSense will not always guess it for you. Under this
+// repo's Centralized Package Management that means a version in Directory.Packages.props plus a
+// versionless <PackageReference> here; otherwise: dotnet add package Microsoft.Identity.Web.
+// Then uncomment the three Microsoft usings below (JwtBearer/Authorization ship with the web SDK).
+using AgentMemoryOS.Abstractions;
 using AgentMemoryOS.Example.WebHost;
+// using Microsoft.AspNetCore.Authentication.JwtBearer;
+// using Microsoft.AspNetCore.Authorization;
+// using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddExampleMemory();
