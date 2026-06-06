@@ -136,3 +136,32 @@ The libraries build under Centralized Package Management with `TreatWarningsAsEr
 `AnalysisMode=all`, full StyleCop, and required XML docs. The example WebHost opts out of the
 internal analyzer suite (`RunAnalyzers=false`) so it reads like idiomatic consumer code. See
 [CLAUDE.md](CLAUDE.md) for the full conventions.
+
+---
+
+## Releasing
+
+Releases are **ambient and PR-governed**: the version number in source *is* the release switch.
+
+> ⚠️ **Bumping `<VersionPrefix>` in [src/Directory.Build.props](src/Directory.Build.props) and
+> merging to `main` publishes a new version to NuGet.org.** There is no separate "publish"
+> button — the version bump is the decision, and the PR is where it's reviewed.
+
+To cut a release:
+
+1. Open a PR that bumps `<VersionPrefix>` (e.g. `1.0.0` → `1.0.1`).
+2. Review and merge to `main`.
+
+From there it's hands-off ([.github/workflows/tag-on-version-bump.yml](.github/workflows/tag-on-version-bump.yml)):
+
+- The watcher fires only when `src/Directory.Build.props` changes on `main`, reads the new
+  version, and pushes the tag `v<version>` (the immutable record of the release).
+- That calls the reusable [release.yml](.github/workflows/release.yml), which packs all five
+  packages + symbols and pushes them to NuGet (`--skip-duplicate`).
+
+Notes:
+
+- **Idempotent.** Editing `Directory.Build.props` for non-version reasons is safe — if the tag
+  `v<version>` already exists, the watcher no-ops (no tag, no publish).
+- **Manual fallback.** Pushing a tag by hand still works: `git tag v1.0.1 && git push origin v1.0.1`.
+- **Prerequisite.** The `NUGET_API_KEY` repository secret must be set (it already is).
